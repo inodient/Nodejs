@@ -1,0 +1,39 @@
+html{
+  font-family:Arial, San-serif, serif;
+}
+
+#div_header > h2 > a {
+  text-decoration:none;
+  color:black;
+}
+
+#div_login > form > fieldset {
+  width:310px;
+}
+
+#div_login > form > fieldset > dl {
+  display:inline-block;
+  width:260px;
+}
+
+#div_login > form > fieldset > dl > dt {
+  display:inline-block;
+  width:80px;
+}
+
+#div_login > form > fieldset > dl > dd {
+  display:inline-block;
+}
+
+#img_submit {
+  position:relative;
+  display:inline-block;
+  width:50px;
+  height:35px;
+  top:2px;
+}
+
+#div_footer > h6 {
+  display:block;
+  margin:10px 0 10px 0;
+}
