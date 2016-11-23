@@ -1,0 +1,52 @@
+[
+  {
+    "DateTime": "2016-11-23T14:57:37.893Z",
+    "InterfaceID": "ID_01",
+    "FromSystem": "ECMS",
+    "ToSystem": "SAP",
+    "Method": "EAI",
+    "Execution": "--",
+    "Result": "S",
+    "Message": "Success"
+  },
+  {
+    "DateTime": "2016-11-23T15:02:18.290Z",
+    "InterfaceID": "ID_02",
+    "FromSystem": "EPTS",
+    "ToSystem": "Engineering",
+    "Method": "HTTP",
+    "Execution": "--",
+    "Result": "S",
+    "Message": "Success"
+  },
+  {
+    "DateTime": "2016-11-23T15:03:06.496Z",
+    "InterfaceID": "ID_03",
+    "FromSystem": "CE_RnD_Portal",
+    "ToSystem": "PTS",
+    "Method": "DB2DB",
+    "Execution": "--",
+    "Result": "F",
+    "Message": "Connection Refused"
+  },
+  {
+    "DateTime": "2016-11-23T15:21:13.870Z",
+    "InterfaceID": "ID_01",
+    "FromSystem": "ECMS",
+    "ToSystem": "SAP",
+    "Method": "EAI",
+    "Execution": "--",
+    "Result": "undefined",
+    "Message": "undefined"
+  },
+  {
+    "DateTime": "2016-11-23T16:25:54.580Z",
+    "InterfaceID": "ID_01",
+    "FromSystem": "ECMS",
+    "ToSystem": "SAP",
+    "Method": "EAI",
+    "Execution": "--",
+    "Result": "S",
+    "Message": "Success"
+  }
+]

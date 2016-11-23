@@ -1,4 +1,4 @@
-const mssql = require('mssql');
+const sql = require('mssql');
 const fs = require('fs');
 
 var _user = "";
@@ -19,38 +19,57 @@ var _database = "";
   });
 }
 
-exports.mssqlCreateConnection = function(){
-  var connection = new mssql.Connection({
-    user: _user,
-    password: _password,
-    server: _server,
-    database: _database
+exports.getInterfaceResult = function( targetDate ){
+  var config = {
+    user:_user,
+    password:_password,
+    server:_server,
+    database:_database
+  };
+
+  sql.connect( config, (err)=>{
+    var request = new sql.Request();
+
+    request.query( "select DateTime,InterfaceID,FromSystem,ToSystem,Method,Execution,Result,Message from TB_InterfaceResult where DateTime >= '" + targetDate + "'", (err, recordset)=>{
+      if( err ) console.log( err );
+      else{
+        console.log( '------------------------' );
+        console.log( JSON.stringify(recordset, null, 2) );
+        console.log( '------------------------' );
+
+        fs.writeFile('./properties/result.json', JSON.stringify(recordset, null, 2), (err)=>{
+          if(err) throw err;
+          else console.log( 'Succeed to generate log file..' );
+        });
+
+        sql.close();
+      }
+    });
   });
-
-  // connection.connect( function(err){
-  //   console.log( "Connection Succeed" );
-  //   if( err ){
-  //     console.log( err );
-  //   }
-  // });
-
-  return connection;
 }
 
-exports.mssqlOpenConnection = function( _connection ){
-  console.log( "Connection Succeed - 1" );
-  _connection.connect( function(err){
-    console.log( "Connection Succeed - 2" );
-    if( err ){
-      console.log( err );
-    }
+exports.setInterfaceResult = function( interfaceID, result, message ){
+  var config = {
+    user:_user,
+    password:_password,
+    server:_server,
+    database:_database
+  };
+
+  var query = "INSERT INTO rddb.dbo.TB_InterfaceResult"+
+              "(DateTime,InterfaceID,FromSystem,ToSystem,Method,Execution,Result,Message)"+
+              "select GETDATE() As DateTime, InterfaceID, FromSystem, ToSystem, Method, Execution, '"+ result +"' AS Result, '"+ message +"' As Message from TB_InterfaceList where InterfaceID = '" + interfaceID +"'" ;
+
+
+  sql.connect( config, (err)=>{
+    var request = new sql.Request();
+    request.query( query, (err, recordset)=>{
+      if( err ) console.log( err );
+      else{
+        console.log( "Insert Succeed" );
+
+        sql.close();
+      }
+    });
   });
-  console.log( "Connection Succeed - 3" );
-  return _connection;
-}
-
-
-exports.mssqlCloseConnection = function( _connection ){
-  _connection.close();
-  console.log( "Disconnect DB" );
 }

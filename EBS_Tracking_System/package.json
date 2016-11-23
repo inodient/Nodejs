@@ -9,11 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async-es": "^2.1.4",
     "body-parser": "^1.15.2",
     "deasync": "^0.1.9",
     "express": "^4.14.0",
     "futures": "^2.3.3",
     "jsonfile": "^2.3.1",
+    "mssql": "^3.3.0",
+    "nodemailer": "^0.7.1",
+    "nodemailer-smtp-transport": "^2.7.2",
     "pug": "^2.0.0-beta3",
     "sequence": "^3.0.0",
     "sync": "^0.2.5"
