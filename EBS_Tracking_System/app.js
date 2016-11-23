@@ -25,14 +25,22 @@ app.get('/', (req,res)=>{
 var db = require( './submodule/db.js' );
 function interfaceTracking( interfaceID, result, message ){
   // 1. Insert I/F result
-  db.setInterfaceResult( interfaceID, result, message );
+  //db.setInterfaceResult( interfaceID, result, message );
 
   // 2. Get I/F result
-  db.getInterfaceResult( new Date().toJSON().slice(0,10) );
+  var resultStr;
+  db.getInterfaceResult().then( function(test) {
+    console.log( test );
+    resultStr = test;
+  });
+  console.log( "---------------------------------" );
+  console.log( resultStr );
+  console.log( "---------------------------------" );
+
 
   // 3. Generate Mail Template
-  var mailTemplate = require( './submodule/mailTemplate.js' );
-  mailTemplate.getInterfaceResultFromLogFile();
+  //var mailTemplate = require( './submodule/mailTemplate.js' );
+  //mailTemplate.getInterfaceResultFromLogFile();
 
   // 4. Get Receiver list
   // 5. Send Mail
@@ -47,6 +55,14 @@ app.get( '/tracking', (req,res)=>{
   interfaceTracking( interfaceID, result, message );
 
   res.send("tracking : " + interfaceID);
+});
+
+var db2 = require( './submodule/db_sync.js' );
+app.get( '/db_sync', (req,res)=>{
+  console.log( "--------------------------" );
+  console.log( db2.syncGetInterfaceResult('test') );
+  console.log( "--------------------------" );
+  res.send( db2.syncGetInterfaceResult() );
 });
 
 app.listen(3000, ()=>{

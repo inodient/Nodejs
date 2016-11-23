@@ -19,7 +19,7 @@ var _database = "";
   });
 }
 
-exports.getInterfaceResult = function( targetDate ){
+exports.getInterfaceResult = function(){
   var config = {
     user:_user,
     password:_password,
@@ -27,24 +27,9 @@ exports.getInterfaceResult = function( targetDate ){
     database:_database
   };
 
-  sql.connect( config, (err)=>{
+  return sql.connect( config ).then( function(){
     var request = new sql.Request();
-
-    request.query( "select DateTime,InterfaceID,FromSystem,ToSystem,Method,Execution,Result,Message from TB_InterfaceResult where DateTime >= '" + targetDate + "'", (err, recordset)=>{
-      if( err ) console.log( err );
-      else{
-        console.log( '------------------------' );
-        console.log( JSON.stringify(recordset, null, 2) );
-        console.log( '------------------------' );
-
-        fs.writeFile('./properties/result.json', JSON.stringify(recordset, null, 2), (err)=>{
-          if(err) throw err;
-          else console.log( 'Succeed to generate log file..' );
-        });
-
-        sql.close();
-      }
-    });
+    return request.query( "select DateTime,InterfaceID,FromSystem,ToSystem,Method,Execution,Result,Message from TB_InterfaceResult" );;
   });
 }
 
