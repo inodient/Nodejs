@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Interface Tracking
+    link(rel='stylesheet' type='text/css' href='main.css')
+  body
+    h1 Interface Tracking Statement
+    table
+      tr
+        th DateTime
+        th Interface ID
+        th From System
+        th To System
+        th Method
+        th Execution
+        th Result
+        th Message
+      tr
+        each resItem in resultArray
+          td= resItem.DateTime
+          td= resItem.InterfaceID
+          td= resItem.FromSystem
+          td= resItem.ToSystem
+          td= resItem.Method
+          td= resItem.Execution
+          td= resItem.Result
+          td= resItem.Message
