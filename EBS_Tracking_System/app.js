@@ -61,8 +61,22 @@ app.get( '/tracking', (req,res)=>{
 });
 
 app.get( '/htmlFile', (req,res)=>{
-  console.log( pug.renderFile( './views/naver.html' ) );
-  res.send( 'Completed..' );
+  //console.log( pug.renderFile( './views/0109_110406-0879T-C.htm' ) );
+  var fs = require('fs');
+  var Iconv = require('iconv-x64').Iconv;
+  var iconv = new Iconv('euc-kr', 'utf-8//translit//ignore');
+
+  fs.readFile('C:/Users/student/Documents/Nodejs/EBS_Tracking_System/views/0109_110406-0879T-C.htm', 'EUC-KR', (err,data)=>{
+    if(err) throw err;
+
+    var htmlStr = data;
+    iconv.convert(htmlStr);
+
+
+    res.send( htmlStr );
+    console.log( data );
+  });
+
 });
 
 app.listen(3000, ()=>{
