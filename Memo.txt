@@ -1,0 +1,45 @@
+<a href="" onxxx="location.href=~~~?id='document.getCookies'">
+
+페이지 꾸밀때
+1. DOM Tree 구성
+2. Event 처리는 Javascript에서 document.querySelector("a");
+3. Web 2.0 Ajax - 비동기
+
+
+<< Servlet에서 JSP로 데이터 넘길때 >>
+---- 이거 쫌 대박이다!
+
+전체 => application : servlet Context | WAS 실행~종료시까지, Resource 설정으로 유용
+특정사용( jsessionID ) => session : HttpSession | 일정 시간후, 로그아웃, 브라우저가 종료
+임시 요청/응답전까지 => request : HttpServletRequest | UI 전달, 프로그램상 추가
+특정 페이지 => page/this
+
+
+
+burpsuit_tool
+DHC REST
+C:\OOPSW\workspace\UserApp\WebContent\22_commandcommandAction.jsp
+=> Background Application 실행
+
+
+# {"host":"krrelay.corp.doosan.com","secureConnection":"false","port":25,"adminAddr":"changho1.kang@doosan.com"}
+
+
+
+---- Dispacher Servlet : Server 내 Change
+---- Response.send Redirect : 브라우저 주소에 박힘
+
+
+
+***** MSSQL Sync : http://stackoverflow.com/questions/35254793/undefined-result-from-node-mssql-query
+***** HTML Generate : http://stackoverflow.com/questions/21654051/how-to-send-an-html-page-as-email-in-nodejs
+***** Promise Sample : http://programmingsummaries.tistory.com/325
+
+
+
+INSERT INTO TB_InterfaceResult
+    (DateTime,InterfaceID,FromSystem,ToSystem,Method,ExecutionResult,Message)
+VALUES ( GETDATE(),'IF_01','FROM','TO','DB2DB','F','ConnectionRefused');
+
+
+http://localhost:3000/tracking?interfaceID=ID_01&result=S&message=Success
