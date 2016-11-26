@@ -3,26 +3,25 @@ html
   head
     meta(charset='utf-8')
     title Interface Tracking
-    link(rel='stylesheet' type='text/css' href='main.css')
   body
     h1 Interface Tracking Statement
-    table
-      tr
-        th DateTime
-        th Interface ID
-        th From System
-        th To System
-        th Method
-        th Execution
-        th Result
-        th Message
-      tr
-        each resItem in resultArray
-          td= resItem.DateTime
-          td= resItem.InterfaceID
-          td= resItem.FromSystem
-          td= resItem.ToSystem
-          td= resItem.Method
-          td= resItem.Execution
-          td= resItem.Result
-          td= resItem.Message
+    table(style="border: 1px solid black; border-collapse: collapse;")
+      tr(style="border: 1px solid black; border-collapse: collapse;")
+        th(style="border: 1px solid black; border-collapse: collapse;") DateTime
+        th(style="border: 1px solid black; border-collapse: collapse;") Interface ID
+        th(style="border: 1px solid black; border-collapse: collapse;") From System
+        th(style="border: 1px solid black; border-collapse: collapse;") To System
+        th(style="border: 1px solid black; border-collapse: collapse;") Method
+        th(style="border: 1px solid black; border-collapse: collapse;") Execution
+        th(style="border: 1px solid black; border-collapse: collapse;") Result
+        th(style="border: 1px solid black; border-collapse: collapse;") Message
+      each resItem in resultArray
+        tr(style="border: 1px solid black; border-collapse: collapse;")
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.DateTime
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.InterfaceID
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.FromSystem
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.ToSystem
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Method
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Execution
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Result
+          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Message

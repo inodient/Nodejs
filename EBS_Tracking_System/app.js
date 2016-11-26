@@ -36,6 +36,8 @@ var j = schedule.scheduleJob( rule, function(){
     var html =  pug.renderFile( './views/trackingMail.pug', { resultArray: resultStr } );
     console.log( html );
 
+    sentGmail( html );
+
     console.log( new Date().toLocaleString() );
   }, function( error ){
     console.log( error );
@@ -86,24 +88,77 @@ app.listen(3000, ()=>{
 
 
 
+app.get('/mailingTemplate', (req,res)=>{
+  var _promise = function(){
+    return new Promise( function( resolve, reject) {
+      console.log( "In Promise..." );
+      resolve( db.getInterfaceResult( new Date().toLocaleString().substring( 0, 10) ) );
+    });
+  };
+
+  _promise().then( function( resultStr ){
+    console.log( resultStr );
+
+    var html =  pug.renderFile( './views/trackingMail.pug', { resultArray: resultStr } );
+    console.log( html );
+
+    //sentGmail( html );
+    res.send( html );
+    console.log( new Date().toLocaleString() );
+  }, function( error ){
+    console.log( error );
+  });
+});
 
 
 
 
-
-app.get( '/gmail', (req,res)=>{
+function sentGmail( htmlStr ){
+  var nodemailer = require('nodemailer');
 
   var smtpTransport = nodemailer.createTransport("SMTP", {
 	   service: 'Gmail',
   	  auth: {
-    		user: 'inodient',
+    		user: 'inodient@gmail.com',
     		pass: 'fern3829@'
   	   }
   });
 
   var mailOptions = {
-  	from: 'changho1.kang@gmail.com',
-  	to: 'changho1.kang@gmail.com',
+  	from: 'inodient@gmail.com',
+  	to: 'inodient@gmail.com',
+  	subject: 'Nodemailer 테스트',
+  	text: '평문 보내기 테스트 ',
+    html: htmlStr
+  };
+
+  smtpTransport.sendMail(mailOptions, function(error, response){
+
+  	if (error){
+  		console.log(error);
+  	} else {
+  		console.log("Message sent : " + response.message);
+  	}
+  	smtpTransport.close();
+  });
+}
+
+
+app.get( '/gmail', (req,res)=>{
+
+  var nodemailer = require('nodemailer');
+
+  var smtpTransport = nodemailer.createTransport("SMTP", {
+	   service: 'Gmail',
+  	  auth: {
+    		user: 'inodient@gmail.com',
+    		pass: 'fern3829@'
+  	   }
+  });
+
+  var mailOptions = {
+  	from: 'inodient@gmail.com',
+  	to: 'inodient@gmail.com',
   	subject: 'Nodemailer 테스트',
   	text: '평문 보내기 테스트 '
   };
