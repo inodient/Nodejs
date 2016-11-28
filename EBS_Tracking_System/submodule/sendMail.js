@@ -23,33 +23,33 @@ var _adminAddr = "";
 }
 
 /////////////// gmail test ///////////////////////////////////////////
-exports.setTransport = function(){
-  var transport = nodemailer.createTransport( smtpTransport({
-      transportMethod: "SMTP",
-      host: "smtp.gmail.com",
-      secureConnection: false,
-      port: 587,
-      requiresAuth: true,
-      domains: ["gmail.com", "googlemail.com"],
-      auth: {
-        user: 'inodient@gmail.com',
-        pass: 'fern3829@'
-    }
-  }));
-
-  return transport;
-}
-/////////////// gmail test ///////////////////////////////////////////
-
 // exports.setTransport = function(){
 //   var transport = nodemailer.createTransport( smtpTransport({
-//     host : _host,
-//     secureConnection : _secureConnection,
-//     port : _port
+//       transportMethod: "SMTP",
+//       host: "smtp.gmail.com",
+//       secureConnection: false,
+//       port: 587,
+//       requiresAuth: true,
+//       domains: ["gmail.com", "googlemail.com"],
+//       auth: {
+//         user: 'inodient@gmail.com',
+//         pass: 'fern3829@'
+//     }
 //   }));
 //
 //   return transport;
 // }
+/////////////// gmail test ///////////////////////////////////////////
+
+exports.setTransport = function(){
+  var transport = nodemailer.createTransport( smtpTransport({
+    host : _host,
+    secureConnection : _secureConnection,
+    port : _port
+  }));
+
+  return transport;
+}
 
 exports.setMailOptions = function( _mailTo, _subject, _html ){
   var mailOptions = {
@@ -63,9 +63,12 @@ exports.setMailOptions = function( _mailTo, _subject, _html ){
 }
 
 exports.sendMail = function( _transport, _mailOptions ){
+
   _transport.sendMail( _mailOptions, function( error, response ){
     if(error){
+        console.log( "Error Occured..." );
         console.log(error);
+        console.log( "Error Occured..." );
     }else{
         console.log("Message sent: " + response.message);
     }

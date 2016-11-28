@@ -21,7 +21,7 @@ var rule = new schedule.RecurrenceRule();
 
 rule.second = 10;
 var j = schedule.scheduleJob( rule, function(){
-  console.log( "Every 10 second...." );
+  console.log( "Every 10 seconds...." );
 
   var _promise = function(){
     return new Promise( function( resolve, reject) {
@@ -36,7 +36,12 @@ var j = schedule.scheduleJob( rule, function(){
     var html =  pug.renderFile( './views/trackingMail.pug', { resultArray: resultStr } );
     console.log( html );
 
-    sentGmail( html );
+    //sentGmail( html );
+
+    var transport = mail.setTransport();
+    var mailOptions = mail.setMailOptions( "minjae2.lee@doosan.com", "mail module test", html );
+    mail.sendMail( transport, mailOptions );
+    res.send("Context Root..");
 
     console.log( new Date().toLocaleString() );
   }, function( error ){
@@ -47,6 +52,7 @@ var j = schedule.scheduleJob( rule, function(){
 // ******************************************* //
 
 app.get('/mail', (req,res)=>{
+
   var transport = mail.setTransport();
   var mailOptions = mail.setMailOptions( "changho1.kang@doosan.com", "mail module test", "<h1>Have a nice Day~</h1>" );
   mail.sendMail( transport, mailOptions );
