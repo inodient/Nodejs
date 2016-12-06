@@ -7,21 +7,21 @@ html
     h1 Interface Tracking Statement
     table(style="border: 1px solid black; border-collapse: collapse;")
       tr(style="border: 1px solid black; border-collapse: collapse;")
-        th(style="border: 1px solid black; border-collapse: collapse;") DateTime
-        th(style="border: 1px solid black; border-collapse: collapse;") Interface ID
-        th(style="border: 1px solid black; border-collapse: collapse;") From System
-        th(style="border: 1px solid black; border-collapse: collapse;") To System
-        th(style="border: 1px solid black; border-collapse: collapse;") Method
-        th(style="border: 1px solid black; border-collapse: collapse;") Execution
-        th(style="border: 1px solid black; border-collapse: collapse;") Result
-        th(style="border: 1px solid black; border-collapse: collapse;") Message
+        th(style="border: 1px solid black; border-collapse: collapse; width=15%") DateTime
+        th(style="border: 1px solid black; border-collapse: collapse; width=15%") Interface ID
+        th(style="border: 1px solid black; border-collapse: collapse; width=15%") From System
+        th(style="border: 1px solid black; border-collapse: collapse; width=15%") To System
+        th(style="border: 1px solid black; border-collapse: collapse; width=5%") Method
+        th(style="border: 1px solid black; border-collapse: collapse; width=15%") Execution
+        th(style="border: 1px solid black; border-collapse: collapse; width=7%") Result
+        th(style="border: 1px solid black; border-collapse: collapse; width=15%") Message
       each resItem in resultArray
         tr(style="border: 1px solid black; border-collapse: collapse;")
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.DateTime
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.InterfaceID
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.FromSystem
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.ToSystem
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Method
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Execution
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Result
-          td(style="border: 1px solid black; border-collapse: collapse;")= resItem.Message
+          td(style="border: 1px solid black; border-collapse: collapse; width=15%")= resItem.DateTime
+          td(style="border: 1px solid black; border-collapse: collapse; width=15%")= resItem.InterfaceID
+          td(style="border: 1px solid black; border-collapse: collapse; width=15%")= resItem.FromSystem
+          td(style="border: 1px solid black; border-collapse: collapse; width=15%")= resItem.ToSystem
+          td(style="border: 1px solid black; border-collapse: collapse; width=5%")= resItem.Method
+          td(style="border: 1px solid black; border-collapse: collapse; width=15%")= resItem.Execution
+          td(style="border: 1px solid black; border-collapse: collapse; width=7%")= resItem.Result
+          td(style="border: 1px solid black; border-collapse: collapse; width=15%")= resItem.Message

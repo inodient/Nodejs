@@ -19,7 +19,7 @@ app.use(express.static('css'));
 var schedule = require('node-schedule');
 var rule = new schedule.RecurrenceRule();
 
-rule.second = 10;
+rule.minute = 30;
 var j = schedule.scheduleJob( rule, function(){
   console.log( "Every 10 seconds...." );
 
@@ -39,7 +39,7 @@ var j = schedule.scheduleJob( rule, function(){
     //sentGmail( html );
 
     var transport = mail.setTransport();
-    var mailOptions = mail.setMailOptions( "minjae2.lee@doosan.com", "mail module test", html );
+    var mailOptions = mail.setMailOptions( "changho1.kang@doosan.com", "Tracking Result", html );
     mail.sendMail( transport, mailOptions );
     res.send("Context Root..");
 
