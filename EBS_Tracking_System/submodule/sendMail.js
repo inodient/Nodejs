@@ -62,13 +62,25 @@ exports.setMailOptions = function( _mailTo, _subject, _html ){
   return mailOptions;
 }
 
+exports.setMailOptionsWithAttachments = function( _mailTo, _subject, _html, _path ){
+  var mailOptions = {
+    from : _adminAddr,
+    to : _mailTo,
+    subject : _subject,
+    html : _html,
+    attachments : [{
+      path : _path
+    }]
+  }
+
+  return mailOptions;
+}
+
 exports.sendMail = function( _transport, _mailOptions ){
 
   _transport.sendMail( _mailOptions, function( error, response ){
     if(error){
-        console.log( "Error Occured..." );
         console.log(error);
-        console.log( "Error Occured..." );
     }else{
         console.log("Message sent: " + response.message);
     }

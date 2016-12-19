@@ -15,98 +15,126 @@ app.use(bodyParser.urlencoded({extenstion:false}));
 app.use(express.static('public'));
 app.use(express.static('css'));
 
-// // ******************************************* //
-// // Scheduler : START
-// var schedule = require('node-schedule');
-// var rule = new schedule.RecurrenceRule();
-//
-// rule.minute = 30;
-// var j = schedule.scheduleJob( rule, function(){
-//   console.log( "Every 10 seconds...." );
-//
-//   var _promise = function(){
-//     return new Promise( function( resolve, reject) {
-//       console.log( "In Promise..." );
-//       resolve( db.getInterfaceResult( new Date().toLocaleString().substring( 0, 10) ) );
-//     });
-//   };
-//
-//   _promise().then( function( resultStr ){
-//     console.log( resultStr );
-//
-//     var html =  pug.renderFile( './views/trackingMail.pug', { resultArray: resultStr } );
-//     console.log( html );
-//
-//     //sentGmail( html );
-//
-//     var transport = mail.setTransport();
-//     var mailOptions = mail.setMailOptions( "changho1.kang@doosan.com", "Tracking Result", html );
-//     mail.sendMail( transport, mailOptions );
-//     res.send("Context Root..");
-//
-//     console.log( new Date().toLocaleString() );
-//   }, function( error ){
-//     console.log( error );
-//   });
-// });
-// // Scheduler : END
-// // ******************************************* //
-//
-// app.get('/mail', (req,res)=>{
-//
-//   var transport = mail.setTransport();
-//   var mailOptions = mail.setMailOptions( "changho1.kang@doosan.com", "mail module test", "<h1>Have a nice Day~</h1>" );
-//   mail.sendMail( transport, mailOptions );
-//   res.send("Context Root..");
-// });
-//
-// app.get( '/tracking', (req,res)=>{
-//   var interfaceID = req.query.interfaceID;
-//   var result = req.query.result;
-//   var message = req.query.message;
-//
-//   db.setInterfaceResult( interfaceID, result, message );
-//   res.send( '<h1>Succeed to Track</h1>' );
-// });
-//
-// app.get( '/htmlFile', (req,res)=>{
-//   //console.log( pug.renderFile( './views/0109_110406-0879T-C.htm' ) );
-//   var fs = require('fs');
-//   var Iconv = require('iconv-x64').Iconv;
-//   var iconv = new Iconv('euc-kr', 'utf-8//translit//ignore');
-//
-//   fs.readFile('C:/Users/student/Documents/Nodejs/EBS_Tracking_System/views/0109_110406-0879T-C.htm', 'EUC-KR', (err,data)=>{
-//     if(err) throw err;
-//
-//     var htmlStr = data;
-//     iconv.convert(htmlStr);
-//
-//
-//     res.send( htmlStr );
-//     console.log( data );
-//   });
-//
-// });
-//
-// app.listen(3000, ()=>{
-//   console.log('Opened At Port 3000....')
-// });
-//
-//
-//
+// ******************************************* //
+// Scheduler : START
+var schedule = require('node-schedule');
+var rule = new schedule.RecurrenceRule();
 
-// Windows Command :  http://stackoverflow.com/questions/20643470/execute-a-command-line-binary-with-node-js
-// R Batch
-// # on Linux
-// R CMD BATCH [options] my_script.R [outfile]
-// # on Microsoft Windows (adjust the path to R.exe as needed)
-// "C:\Program Files\R\R-2.13.1\bin\R.exe" CMD BATCH
-//    --vanilla --slave "c:\my projects\my_script.R"
+rule.minute = 30;
+var j = schedule.scheduleJob( rule, function(){
+  console.log( "Every 10 seconds...." );
+
+  var _promise = function(){
+    return new Promise( function( resolve, reject) {
+      resolve( db.getInterfaceResult( new Date().toLocaleString().substring( 0, 10) ) );
+    });
+  };
+
+  _promise().then( function( resultStr ){
+    var html =  pug.renderFile( './views/trackingMail.pug', { resultArray: resultStr } );
+
+    //sentGmail( html );
+
+    var transport = mail.setTransport();
+    var mailOptions = mail.setMailOptions( "changho1.kang@doosan.com", "Tracking Result", html );
+    mail.sendMail( transport, mailOptions );
+
+  }, function( error ){
+    console.log( error );
+  });
+});
+// Scheduler : END
+// ******************************************* //
+
+// ******************************************* //
+// Scheduler Machine Learning : START
+var scheduler_machineLearning = require('node-schedule');
+var rule_machineLearning = new schedule.RecurrenceRule();
+
+rule_machineLearning.minute = 10;
+var j_machineLearning = schedule.scheduleJob( rule_machineLearning, function(){
+  console.log( "Every 50 seconds...." );
+
+  var exec = require('child_process').exec;
+  var cmd = '"C:/Program Files/R/R-3.3.2/bin/R.exe" CMD BATCH --vanilla --slave "C:/__Repo.Workspace/R/EBS_Tracking_Machine_Learning.R"'
+
+  var _promise = function(){
+    return new Promise( function( resolve, reject) {
+      console.log( "In promise Machine Learning...." );
+
+      resolve( exec(cmd, function(error, stdout, stderr) {
+          console.log( "error : " + error );
+          console.log( "stdout : " + stdout );
+          console.log( "stderr : " + stderr );
+        })
+      );
+    });
+  }
+
+  _promise().then( function(){
+
+    var lineReader = require('readline').createInterface({
+      input: require('fs').createReadStream('./Tracking_Result/result.txt')
+    });
+
+    var lineStr = "";
+
+    lineReader.on('line', function (line) {
+      console.log('Line from file:', line);
+
+      lineStr = lineStr + line + "<br />";
+
+      if( line.indexOf("p_value : " ) > -1 ){
+        line = line.replace( "p_value : ", "" );
+        console.log( "P-VALUE : " + parseFloat( line ) );
+
+        if( parseFloat( line ) >= 0.0 ){
+
+          var transport = mail.setTransport();
+          var mailOptions = mail.setMailOptionsWithAttachments( "changho1.kang@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+        }
+      }
+    });
+  }, function( error ){
+    console.log( error );
+  });
+});
+// Scheduler Machine Learning : END
+// ******************************************* //
+
+app.get('/mail', (req,res)=>{
+
+  var transport = mail.setTransport();
+  var mailOptions = mail.setMailOptions( "changho1.kang@doosan.com", "mail module test", "<h1>Have a nice Day~</h1>" );
+  mail.sendMail( transport, mailOptions );
+  res.send("Context Root..");
+});
+
+app.get( '/tracking', (req,res)=>{
+  var interfaceID = req.query.interfaceID;
+  var result = req.query.result;
+  var message = req.query.message;
+
+  db.setInterfaceResult( interfaceID, result, message );
+  res.send( '<h1>Succeed to Track</h1>' );
+});
 
 app.get( '/machineLearningResult', (req,res)=>{
 
+  var exec = require('child_process').exec;
+  //var cmd = 'notepad.exe';
+  var cmd = '"C:/Program Files/R/R-3.3.2/bin/R.exe" CMD BATCH --vanilla --slave "C:/__Repo.Workspace/R/EBS_Tracking_Machine_Learning.R"'
+
+  exec(cmd, function(error, stdout, stderr) {
+    // command output is in stdout
+    console.log( error );
+    console.log( stderr );
+  });
+
+
   var lineReader = require('readline').createInterface({
-    input: require('fs').createReadStream('/Users/changhokang/git/R/result.txt')
+    input: require('fs').createReadStream('./Tracking_Result/result.txt')
   });
 
   lineReader.on('line', function (line) {
@@ -122,14 +150,6 @@ app.get( '/machineLearningResult', (req,res)=>{
       }
     }
   });
-
-  //
-  // fs.readFile('/Users/changhokang/git/R/result.txt', 'UTF-8', (err,data)=>{
-  //   if(err) throw err;
-  //
-  //   res.send( data );
-  //   console.log( data );
-  // });
 
   res.send ( "Success" );
 });
@@ -161,9 +181,6 @@ app.get('/mailingTemplate', (req,res)=>{
     console.log( error );
   });
 });
-
-
-
 
 function sentGmail( htmlStr ){
   var nodemailer = require('nodemailer');
@@ -226,4 +243,22 @@ app.get( '/gmail', (req,res)=>{
   });
 
   res.send( "Gmail Sent" );
+});
+
+app.get( '/htmlFile', (req,res)=>{
+  //console.log( pug.renderFile( './views/0109_110406-0879T-C.htm' ) );
+  var fs = require('fs');
+  var Iconv = require('iconv-x64').Iconv;
+  var iconv = new Iconv('euc-kr', 'utf-8//translit//ignore');
+
+  fs.readFile('C:/Users/student/Documents/Nodejs/EBS_Tracking_System/views/0109_110406-0879T-C.htm', 'EUC-KR', (err,data)=>{
+    if(err) throw err;
+
+    var htmlStr = data;
+    iconv.convert(htmlStr);
+
+
+    res.send( htmlStr );
+    console.log( data );
+  });
 });
