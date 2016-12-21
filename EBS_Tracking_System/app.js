@@ -160,6 +160,12 @@ app.listen(3000, ()=>{
 
 
 
+
+
+
+
+
+
 app.get('/mailingTemplate', (req,res)=>{
   var _promise = function(){
     return new Promise( function( resolve, reject) {
