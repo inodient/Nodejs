@@ -51,9 +51,9 @@ var j = schedule.scheduleJob( rule, function(){
 var scheduler_machineLearning = require('node-schedule');
 var rule_machineLearning = new schedule.RecurrenceRule();
 
-rule_machineLearning.minute = 10;
+rule_machineLearning.minute = 22;
 var j_machineLearning = schedule.scheduleJob( rule_machineLearning, function(){
-  console.log( "Every 50 seconds...." );
+  console.log( "Every 15 minutes...." );
 
   var exec = require('child_process').exec;
   var cmd = '"C:/Program Files/R/R-3.3.2/bin/R.exe" CMD BATCH --vanilla --slave "C:/__Repo.Workspace/R/EBS_Tracking_Machine_Learning.R"'
@@ -93,6 +93,108 @@ var j_machineLearning = schedule.scheduleJob( rule_machineLearning, function(){
           var transport = mail.setTransport();
           var mailOptions = mail.setMailOptionsWithAttachments( "changho1.kang@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
           mail.sendMail( transport, mailOptions );
+
+          /*
+          changho1.kang@doosan.com
+          hyeonuk.gwak@doosan.com
+          kideok2.kim@doosan.com
+          dongju.kim@doosan.com
+          seok1.kim@doosan.com
+          chulho.kim@doosan.com
+          jonguk.byun@doosan.com
+          jun.ahn@doosan.com
+          minjae2.lee@doosan.com
+          sanghan.lee@doosan.com
+          woong.lee@doosan.com
+          dohyun.jung@doosan.com
+          changyong.jung@doosan.com
+          sungjoon.chin@doosan.com
+          kihun.choi@doosan.com
+          mankyu.choi@doosan.com
+          injun1.choi@doosan.com
+          jongchan.han@doosan.com
+          joungmin.hong@doosan.com
+          hoon2.kang@doosan.com
+          hongtae2.kim@doosan.com
+          sinyeong.park@doosan.com
+          chulwook.park@doosan.com
+          kihoon2.lee@doosan.com
+          seonghoon1.jeong@doosan.com
+          jinchul.jung@doosan.com
+          jungrim.choi@doosan.com
+          hwal1.choi@doosan.com
+          haksung.um@doosan.com
+          kihyun.you@doosan.com
+          sungjin2.lim@doosan.com
+          yonghoon.jung@doosan.com
+          */
+
+
+          mailOptions = mail.setMailOptionsWithAttachments( "changho1.kang@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "hyeonuk.gwak@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "kideok2.kim@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "dongju.kim@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "seok1.kim@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "chulho.kim@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "jonguk.byun@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "jun.ahn@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "minjae2.lee@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "sanghan.lee@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "woong.lee@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "dohyun.jung@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "changyong.jung@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "sungjoon.chin@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "kihun.choi@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "mankyu.choi@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "injun1.choi@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "jongchan.han@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "joungmin.hong@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "hoon2.kang@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "hongtae2.kim@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "sinyeong.park@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "chulwook.park@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "kihoon2.lee@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "seonghoon1.jeong@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "jinchul.jung@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "jungrim.choi@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "hwal1.choi@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "haksung.um@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "kihyun.you@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "sungjin2.lim@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+          mailOptions = mail.setMailOptionsWithAttachments( "yonghoon.jung@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+          mail.sendMail( transport, mailOptions );
+
         }
       }
     });
@@ -137,16 +239,29 @@ app.get( '/machineLearningResult', (req,res)=>{
     input: require('fs').createReadStream('./Tracking_Result/result.txt')
   });
 
+  var lineStr = "";
+
   lineReader.on('line', function (line) {
     console.log('Line from file:', line);
     console.log( line.indexOf("p_value : ") );
+
+    lineStr = lineStr + line + "<br />";
 
     if( line.indexOf("p_value : " ) > -1 ){
       line = line.replace( "p_value : ", "" );
       console.log( "VALUE : " + parseFloat( line ) );
 
+
+
       if( parseFloat( line ) >= 0.0 ){
         console.log( "Machine Learning Succeed" );
+
+        var transport = mail.setTransport();
+        var mailOptions = mail.setMailOptionsWithAttachments( "changho1.kang@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+        mail.sendMail( transport, mailOptions );
+
+        // mailOptions = mail.setMailOptionsWithAttachments( "kihun.choi@doosan.com", "Tracking Result", lineStr, "./views/result.jpg" );
+        // mail.sendMail( transport, mailOptions );
       }
     }
   });
